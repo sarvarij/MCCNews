@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MCC News</string>
+    <string name="news_fetch_failed">Couldn\'t fetch the news - check your internet connection</string>
+</resources>
