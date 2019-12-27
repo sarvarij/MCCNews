@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import app.mccnews.MainActivityVM;
 import app.mccnews.R;
+import app.mccnews.models.NewsItemModel;
 import app.mccnews.views.NewsItemViewHolder;
 import app.mccnews.views.NewsListAdapter;
 import butterknife.BindView;
@@ -88,9 +89,9 @@ public class NewsListFragment extends Fragment implements NewsItemViewHolder.New
     }
 
     @Override
-    public void newsItemSelected(String externalLink) {
+    public void newsItemSelected(NewsItemModel newsItem) {
         if (newsItemClickListener != null){
-            newsItemClickListener.newsItemSelected(externalLink);
+            newsItemClickListener.newsItemSelected(newsItem);
         }
     }
 

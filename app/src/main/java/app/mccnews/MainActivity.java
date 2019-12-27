@@ -12,8 +12,11 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
+import org.parceler.Parcels;
+
 import app.mccnews.fragments.NewsListFragment;
 import app.mccnews.fragments.NewsPageFragment;
+import app.mccnews.models.NewsItemModel;
 import app.mccnews.views.NewsItemViewHolder;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,10 +68,10 @@ public class MainActivity extends AppCompatActivity implements NewsItemViewHolde
     }
 
     @Override
-    public void newsItemSelected(String externalLink) {
+    public void newsItemSelected(NewsItemModel newsItem) {
         NewsPageFragment newsPageFragment = new NewsPageFragment();
         Bundle arguments = new Bundle();
-        arguments.putString(NewsPageFragment.ARG_LINK, externalLink);
+        arguments.putParcelable(NewsPageFragment.ARG_NEWS_ITEM, Parcels.wrap(newsItem));
         newsPageFragment.setArguments(arguments);
 
         getSupportFragmentManager().beginTransaction()

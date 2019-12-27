@@ -17,15 +17,20 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.parceler.Parcels;
+
 import app.mccnews.MainActivityVM;
 import app.mccnews.R;
+import app.mccnews.models.NewsItemModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewsPageFragment extends Fragment {
 
     public static final String TAG = "FRAGMENT_NEWS_PAGE";
-    public static final String ARG_LINK = "ARG_LINK";
+    public static final String ARG_NEWS_ITEM = "ARG_NEWS_ITEM";
+
+    private NewsItemModel newsItem;
 
     @BindView(R.id.web_view)
     protected WebView webView;
@@ -39,15 +44,19 @@ public class NewsPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        parseArguments();
+
         View rootView = inflater.inflate(R.layout.fragment_news_page, container, false);
 
         ButterKnife.bind(this, rootView);
 
         setupWebView();
 
-        webView.loadUrl(getArguments().getString(ARG_LINK));
-
         return rootView;
+    }
+
+    private void parseArguments(){
+        newsItem = Parcels.unwrap(getArguments().getParcelable(ARG_NEWS_ITEM));
     }
 
     private void setupWebView(){
@@ -55,15 +64,7 @@ public class NewsPageFragment extends Fragment {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
 
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                if (mainActivityVM != null) {
-                    mainActivityVM.setPageTitle(webView.getTitle());
-                }
-            }
-        });
+        webView.setWebViewClient(new WebViewClient());
     }
 
     @Override
@@ -71,6 +72,9 @@ public class NewsPageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mainActivityVM = ViewModelProviders.of(getActivity()).get(MainActivityVM.class);
+
+        mainActivityVM.setPageTitle(newsItem.getName());
+        webView.loadUrl(newsItem.getExternalLink());
     }
 
     @Override

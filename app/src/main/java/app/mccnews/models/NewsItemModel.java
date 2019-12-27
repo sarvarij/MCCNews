@@ -2,25 +2,28 @@ package app.mccnews.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import lombok.Data;
 
 @Data
+@Parcel
 public class NewsItemModel {
     @SerializedName("id")
-    private String id;
+    protected String id;
 
     @SerializedName("name")
-    private String name;
+    protected String name;
 
     @SerializedName("subtitle")
-    private String subtitle;
+    protected String subtitle;
 
     @SerializedName("external_link")
-    private String externalLink;
+    protected String externalLink;
 
     @SerializedName("created")
-    private String created;
+    protected String created;
 
     @SerializedName("thumbnail")
-    private String thumbnail;
+    protected String thumbnail;
 }

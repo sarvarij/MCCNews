@@ -44,7 +44,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsItemViewHolder>
     }
 
     @Override
-    public void newsItemSelected(String externalLink) {
-        listener.newsItemSelected(externalLink);
+    public void newsItemSelected(NewsItemModel newsItem) {
+        listener.newsItemSelected(newsItem);
     }
 }

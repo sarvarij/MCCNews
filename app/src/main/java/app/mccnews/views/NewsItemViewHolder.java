@@ -22,7 +22,7 @@ public class NewsItemViewHolder extends RecyclerView.ViewHolder implements View.
     private NewsItemClickListener listener;
 
     public interface NewsItemClickListener {
-        void newsItemSelected(String externalLink);
+        void newsItemSelected(NewsItemModel newsItem);
     }
 
     @BindView(R.id.tv_news_title)
@@ -33,7 +33,7 @@ public class NewsItemViewHolder extends RecyclerView.ViewHolder implements View.
     protected ImageView ivThumbnail;
 
     private final Context context;
-    private String externalLink;
+    private NewsItemModel newsItem;
 
     NewsItemViewHolder(@NonNull View itemView, @NonNull NewsItemClickListener listener) {
         super(itemView);
@@ -55,14 +55,14 @@ public class NewsItemViewHolder extends RecyclerView.ViewHolder implements View.
                 .centerCrop()
                 .into(ivThumbnail);
 
-        externalLink = newsItemModel.getExternalLink();
+        this.newsItem = newsItemModel;
     }
 
 
     @Override
     public void onClick(View view) {
-        if (externalLink != null){
-            listener.newsItemSelected(externalLink);
+        if (newsItem != null){
+            listener.newsItemSelected(newsItem);
         }
     }
 }
