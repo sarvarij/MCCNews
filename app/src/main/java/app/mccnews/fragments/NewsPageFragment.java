@@ -73,7 +73,7 @@ public class NewsPageFragment extends Fragment {
 
         mainActivityVM = ViewModelProviders.of(getActivity()).get(MainActivityVM.class);
 
-        mainActivityVM.setPageTitle(newsItem.getName());
+        mainActivityVM.setPageTitle(newsItem.getSubtitle());
         webView.loadUrl(newsItem.getExternalLink());
     }
 

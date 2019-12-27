@@ -1,16 +1,13 @@
 package app.mccnews;
 
+import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import org.parceler.Parcels;
 
@@ -25,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements NewsItemViewHolde
 
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
+    @BindView(R.id.tv_toolbar_title)
+    protected TextView tvToolbarTitle;
     @BindView(R.id.main_frame)
     protected FrameLayout mainFrame;
 
@@ -50,8 +49,11 @@ public class MainActivity extends AppCompatActivity implements NewsItemViewHolde
     }
 
     private void setupToolbar(){
+        getSupportActionBar().setTitle("");
+
         mainActivityVM.observePageTitle(this, pageTitle -> {
-            toolbar.setTitle(pageTitle.isEmpty() ? getString(R.string.app_name) : pageTitle);
+            tvToolbarTitle.setText(pageTitle.isEmpty() ? getString(R.string.app_title) : pageTitle);
+            tvToolbarTitle.setGravity(pageTitle.isEmpty() ? Gravity.CENTER_HORIZONTAL : Gravity.START);
             getSupportActionBar().setDisplayHomeAsUpEnabled(!pageTitle.isEmpty());
         });
     }

@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">MCC News</string>
+    <string name="app_name" translatable="false">MCC News</string>
+    <string name="app_title">NEWS</string>
     <string name="news_fetch_failed">Couldn\'t fetch the news - check your internet connection</string>
 </resources>
